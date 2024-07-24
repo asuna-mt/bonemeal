@@ -439,3 +439,27 @@ if minetest.get_modpath("bushes_classic") then
 		{"bushes:fruitless_bush", grow_bush, "soil"},
 	})
 end
+
+if minetest.get_modpath("x_farming") then
+	-- Register crops
+	bonemeal:add_crop({
+		{"x_farming:barley_", 8, "x_farming:seed_barley"},
+		{"x_farming:beetroot_", 8, "x_farming:seed_beetroot"},
+		{"x_farming:carrot_", 8, "x_farming:seed_carrot"},
+		{"x_farming:cocoa_", 3},
+		{"x_farming:coffee_", 5, "x_farming:seed_coffee"},
+		{"x_farming:corn_", 10, "x_farming:seed_corn"},
+		{"x_farming:melon_", 8, "x_farming:seed_melon"},
+		{"x_farming:potato_", 8, "x_farming:seed_potato"},
+		{"x_farming:pumpkin_", 8, "x_farming:seed_pumpkin"},
+		{"x_farming:rice_", 8, "x_farming:seed_rice"},
+		{"x_farming:soybean_", 7, "x_farming:seed_soybean"},
+		{"x_farming:stevia_", 8, "x_farming:seed_stevia"},
+		{"x_farming:strawberry_", 4, "x_farming:seed_strawberry"},
+	})
+
+	-- Register trees
+	bonemeal:add_sapling({
+		{"x_farming:kiwi_sapling", x_farming.grow_sapling, "soil"},
+	})
+end

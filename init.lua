@@ -140,16 +140,17 @@ end
 
 
 -- crops check
-local function check_crops(pos, nodename, strength, light_ok)
+local function check_crops(pos, node, strength, light_ok)
 
 	local mod, crop, stage, nod, def
+	local nodename = node.name
 
 	-- grow registered crops
 	for n = 1, #crops do
 
 		-- check if crop can grow in current light level
 		if (light_ok or crops[n][4] == true)
-		and (nodename:find(crops[n][1])
+		and (nodename:find("^" .. crops[n][1])
 		or nodename == crops[n][3]) then
 
 			-- separate mod and node name
@@ -176,9 +177,7 @@ local function check_crops(pos, nodename, strength, light_ok)
 				return false
 			end
 
-			def = def and def.place_param2 or 0
-
-			minetest.set_node(pos, {name = nod, param2 = def})
+			minetest.set_node(pos, {name = nod, param2 = node.param2 or def.place_param2})
 
 			particle_effect(pos)
 
@@ -481,7 +480,7 @@ function bonemeal:on_use(pos, strength, node)
 	end
 
 	-- check for crop growth
-	if check_crops(pos, node.name, strength, light_ok) then
+	if check_crops(pos, node, strength, light_ok) then
 		return true
 	end
 end
@@ -611,7 +610,7 @@ minetest.register_craft({
 })
 
 -- bonemeal (from player bones)
-if minetest.settings:get_bool("bonemeal.disable_deathbones_recipe") ~= true then
+if minetest.settings:get_bool("bonemeal.disable_deathbones_recipe",true) ~= true then
 
 	minetest.register_craft({
 		output = "bonemeal:bone 2",
