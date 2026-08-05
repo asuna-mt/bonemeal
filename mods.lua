@@ -500,6 +500,7 @@ if minetest.get_modpath("x_farming") then
 
 	-- Register trees
 	bonemeal:add_sapling({
+		{"x_farming:christmas_tree_sapling", x_farming.grow_christmas_tree, "soil"},
 		{"x_farming:kiwi_sapling", x_farming.grow_sapling, "soil"},
 	})
 end
